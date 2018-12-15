@@ -19,6 +19,7 @@ render(App);
 
 if (module.hot) {
   module.hot.accept('./components/App', () => {
+    // eslint-disable-next-line global-require
     const NextComponent = require('./components/App').default;
 
     render(NextComponent);

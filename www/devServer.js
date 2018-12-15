@@ -1,16 +1,13 @@
+import express from 'express';
+import webpack from 'webpack';
+import template from '../src/template';
+import config from '../config/webpack.client.hot';
+
 require('dotenv').config();
 
-const express = require('express');
-const webpack = require('webpack');
-// const React = require('react');
-// const ReactDOM = require('react-dom/server');
-
-const port = process.env.PORT || 3000;
-const template = require('./template');
-const config = require('../config/webpack.client.hot');
-
-const compiler = webpack(config);
 const app = express();
+const compiler = webpack(config);
+const port = process.env.PORT || 3000;
 
 app.use('/', express.static('www'));
 app.use('/data', express.static('data'));

@@ -10,7 +10,7 @@ module.exports = {
   target: 'node',
   entry: [path.join(process.cwd(), 'src/server.js')],
   output: {
-    path: path.join(process.cwd(), 'dist'),
+    path: path.join(process.cwd(), 'www'),
     filename: 'server.bundle.js'
   },
   externals: fs

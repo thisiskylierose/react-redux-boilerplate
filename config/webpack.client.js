@@ -9,7 +9,7 @@ module.exports = {
   devtool: 'source-map',
   entry: [path.join(process.cwd(), 'src/client.js')],
   output: {
-    path: path.join(process.cwd(), 'dist'),
+    path: path.join(process.cwd(), 'www'),
     filename: 'assets/scripts/bundle.js',
     chunkFilename: 'assets/scripts/[id].css',
     publicPath: '/assets/'

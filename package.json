@@ -4,14 +4,14 @@
   "description": "React & Redux boilerplate for awesome single-page apps",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf dist/assets && rm -rf dist/data",
+    "clean": "rm -rf www/assets && rm -rf www/data",
     "slate": "rm -rf node_modules && npm install",
     "build": "npm-run-all clean build:client build:server",
     "build:client": "webpack --config config/webpack.client.js",
     "build:server": "webpack --config config/webpack.server.js",
-    "start": "babel-node src/devServer.js",
-    "start:server": "NODE_ENV=development node dist/server.bundle.js",
-    "lint": "eslint --ext .js src/",
+    "start": "babel-node www/devServer.js",
+    "start:server": "NODE_ENV=development node www/server.bundle.js",
+    "lint": "eslint --ext .js src/ www/",
     "test": "test"
   },
   "repository": {

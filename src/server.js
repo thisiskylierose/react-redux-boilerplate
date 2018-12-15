@@ -1,21 +1,23 @@
-require('dotenv').config();
+import express from 'express';
+import React from 'react';
+import ReactDOM from 'react-dom/server';
+import template from './template';
+import App from './components/App';
 
-const express = require('express');
-const webpack = require('webpack');
-// const React = require('react');
-// const ReactDOM = require('react-dom/server');
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
-const template = require('./template');
 
 app.use('/', express.static('www'));
 app.use('/data', express.static('data'));
 
 app.get('*', (req, res) => {
+  const htmlMarkup = ReactDOM.renderToString(<App />);
+
   res.send(
     template({
-      body: 'Hello World',
+      body: htmlMarkup,
       title: 'React & Redux boilerplate'
     })
   );
