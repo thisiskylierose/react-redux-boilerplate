@@ -1,0 +1,10 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.wrapper {
+  box-sizing: border-box;
+  background: #222;
+  color: #fff;
+  padding: 10px;
+}
