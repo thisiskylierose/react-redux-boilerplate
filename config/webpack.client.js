@@ -1,24 +1,29 @@
+require('dotenv').config();
+
 const path = require('path');
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
-  devtool: 'cheap-module-eval-source-map',
-  entry: [
-    'webpack-hot-middleware/client',
-    'react-hot-loader/patch',
-    path.join(process.cwd(), 'src/client.js')
-  ],
+  devtool: 'source-map',
+  entry: [path.join(process.cwd(), 'src/client.js')],
   output: {
     path: path.join(process.cwd(), 'dist'),
-    filename: 'scripts/bundle.js',
+    filename: 'assets/scripts/bundle.js',
+    chunkFilename: 'assets/scripts/[id].css',
     publicPath: '/assets/'
   },
   resolve: {
     modules: ['node_modules', path.join(process.cwd(), 'src')],
     extensions: ['.js', '.json']
   },
-  plugins: [new webpack.HotModuleReplacementPlugin({ multiStep: true })],
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'assets/styles/bundle.css',
+      chunkFilename: 'assets/styles/[id].css'
+    })
+  ],
   module: {
     rules: [
       {
@@ -27,9 +32,11 @@ module.exports = {
         include: path.join(process.cwd(), 'src')
       },
       {
-        test: /\.css/,
+        test: /\.css$/,
         use: [
-          { loader: 'style-loader' },
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
           {
             loader: 'css-loader',
             options: {
@@ -42,7 +49,10 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               config: {
-                path: path.join(process.cwd(), 'config/postcss.config.js')
+                path: path.join(process.cwd(), 'config/postcss.config.js'),
+                ctx: {
+                  cssnano: {}
+                }
               }
             }
           }

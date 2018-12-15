@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
-import App from './App';
+import App from './components/App';
 
 const render = (Component) => {
   const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate;
@@ -18,8 +18,8 @@ const render = (Component) => {
 render(App);
 
 if (module.hot) {
-  module.hot.accept('./App', () => {
-    const NextComponent = require('./App').default;
+  module.hot.accept('./components/App', () => {
+    const NextComponent = require('./components/App').default;
 
     render(NextComponent);
   });
