@@ -1,7 +1,7 @@
 import express from 'express';
 import webpack from 'webpack';
-import template from '../src/template';
-import config from '../config/webpack.client.hot';
+import template from './src/template';
+import config from './config/webpack.client.hot';
 
 require('dotenv').config();
 

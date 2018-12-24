@@ -6,8 +6,8 @@
 
 # Build directories
 dist/*
+www/*
 !dist/.gitkeep
-www/assets
 !www/.gitkeep
 !/www/views
 
