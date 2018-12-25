@@ -1,22 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
 
-import styles from './client.css';
-import App from './components/App';
+import configureStore from './redux/configureStore';
+import AppComponent from './components/App';
 
-const render = (Component) => {
+const initialState = window.__API__;
+const appStore = configureStore(initialState);
+
+const render = Component => {
   const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate;
 
   renderMethod(
-    <AppContainer>
-      <Component />
-    </AppContainer>,
+    <Provider store={appStore}>
+      <AppContainer>
+        <Component />
+      </AppContainer>
+    </Provider>,
     document.getElementById('root')
   );
 };
 
-render(App);
+render(AppComponent);
 
 if (module.hot) {
   module.hot.accept('./components/App', () => {

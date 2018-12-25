@@ -1,5 +1,5 @@
 .editorconfig
-.babelrc
+# .babelrc
 .eslintrc
 .prettierrc
 package.json

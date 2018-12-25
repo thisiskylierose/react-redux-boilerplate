@@ -1,4 +1,4 @@
-module.exports = ({ body, title }) => `
+module.exports = ({ body, title, state }) => `
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,6 +10,7 @@ module.exports = ({ body, title }) => `
   <body>
     <div id="root" style="height: 100%;">${body}</div>
   </body>
+  <script>window.__API__ = ${state};</script>
   <script src="./assets/scripts/bundle.js"></script>
 </html>
 `;
