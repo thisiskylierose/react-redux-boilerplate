@@ -1,4 +1,6 @@
 import express from 'express';
+import bodyParser from 'body-parser';
+
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import { Provider } from 'react-redux';
@@ -14,8 +16,23 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use('/', express.static('www'));
 app.use('/data', express.static('data'));
+
+app.get('/api/:route', async (req, res) => {
+  // console.log('req.params.route', req.params.route);
+  try {
+    const result = await fetchGreeting();
+    // console.log(result);
+    res.send(result);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error);
+    res.send(error);
+  }
+});
 
 app.get('*', async (req, res) => {
   try {
