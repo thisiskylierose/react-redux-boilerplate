@@ -2,15 +2,16 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import webpack from 'webpack';
 
-import template from './src/template';
-import config from './config/webpack.client.hot';
-import fetchGreeting from './src/mockAPI/greeting';
+import template from './template';
+import config from '../../config/webpack.client.hot';
+import fetchGreeting from '../mockAPI/greeting';
 
 require('dotenv').config();
 
 const app = express();
 const compiler = webpack(config);
 const port = process.env.PORT || 3000;
+const basePath = `http://localhost:${port}`;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -40,10 +41,11 @@ app.get('/api/:route', async (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.send(
+  res.status(200).send(
     template({
-      body: 'Hello World',
-      title: 'React & Redux boilerplate'
+      title: 'React & Redux boilerplate',
+      base: basePath,
+      body: 'React & Redux boilerplate'
     })
   );
 });
@@ -54,6 +56,6 @@ app.listen(port, err => {
     console.error(err);
   } else {
     // eslint-disable-next-line no-console
-    console.log(`Listening at: http://localhost:${port}`);
+    console.log(`Listening at: ${basePath}`);
   }
 });

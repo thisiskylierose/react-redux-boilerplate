@@ -1,0 +1,25 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  display: inline-block;
+  margin: 1rem;
+}
+
+.item a {
+  color: #626B74;
+  text-decoration: none;
+}
+
+.item a:hover {
+  color: #59534a;
+  text-decoration: underline;
+}
+
+.item .active {
+  color: #333;
+  text-decoration: underline;
+}

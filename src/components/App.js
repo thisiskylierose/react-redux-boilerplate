@@ -1,42 +1,41 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Route, withRouter } from 'react-router-dom';
 
+import appRoutes from '../routes';
 import mapStateToProps from '../redux/mapStateToProps';
 import mapDispatchToProps from '../redux/mapDispatchToProps';
+import Navigation from './Navigation';
 
 import '../styles/global.css';
 import styles from './app.css';
 
-class AppComponent extends React.Component {
-  componentDidMount() {
-    const { actions, state } = this.props;
+const AppComponent = props => (
+  <div className={styles.container}>
+    <nav className={styles.navigation}>
+      <Navigation appRoutes={appRoutes} />
+    </nav>
+    <div className={styles.content}>
+      {appRoutes.map(route => {
+        const { path, index, component: PageComponent } = route;
+        const isExact = path === '/';
 
-    if (!state.greeting.initialFetch) {
-      actions.greeting.setInitialValue();
-    }
-  }
+        return (
+          <Route
+            key={index}
+            path={path}
+            exact={isExact}
+            render={() => <PageComponent {...props} />}
+          />
+        );
+      })}
+    </div>
+  </div>
+);
 
-  render() {
-    const { state } = this.props;
-
-    return (
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <div className={styles.greeting}>
-            {state.greeting.initialFetch && `${state.greeting.message}`}
-            {!state.greeting.initialFetch && (
-              <span className={styles.loading}>
-                <span className={styles.spinner} />
-              </span>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AppComponent);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AppComponent)
+);

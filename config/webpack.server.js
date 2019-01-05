@@ -8,7 +8,7 @@ module.exports = {
   mode: process.env.NODE_ENV || 'development',
   devtool: 'source-map',
   target: 'node',
-  entry: [path.join(process.cwd(), 'src/server.js')],
+  entry: [path.join(process.cwd(), 'src/server/express.www.js')],
   output: {
     path: path.join(process.cwd(), 'www'),
     filename: 'server.bundle.js'

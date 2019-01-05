@@ -13,7 +13,7 @@
     "watch:server": "webpack --watch --config config/webpack.server.js",
     "watch:bundle": "nodemon www/server.bundle.js",
     "start": "npm-run-all clean start:dev",
-    "start:dev": "babel-node devServer.js",
+    "start:dev": "babel-node src/server/express.dev.js",
     "start:server": "NODE_ENV=development node www/server.bundle.js",
     "start:watch": "npm-run-all build -p watch:client watch:server watch:bundle",
     "lint": "eslint --ext .js src/",
@@ -78,6 +78,7 @@
     "react": "16.6.3",
     "react-dom": "16.6.3",
     "react-redux": "6.0.0",
+    "react-router-dom": "4.3.1",
     "redux": "4.0.1",
     "redux-thunk": "2.3.0"
   }
