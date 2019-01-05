@@ -11,7 +11,7 @@ class AppComponent extends React.Component {
   componentDidMount() {
     const { actions, state } = this.props;
 
-    if (state.greeting.value === '') {
+    if (!state.greeting.initialFetch) {
       actions.greeting.setInitialValue();
     }
   }
@@ -22,7 +22,14 @@ class AppComponent extends React.Component {
     return (
       <div className={styles.container}>
         <div className={styles.content}>
-          <span className={styles.alert}>{state.greeting.value}</span>
+          <div className={styles.greeting}>
+            {state.greeting.initialFetch && `${state.greeting.message}`}
+            {!state.greeting.initialFetch && (
+              <span className={styles.loading}>
+                <span className={styles.spinner} />
+              </span>
+            )}
+          </div>
         </div>
       </div>
     );

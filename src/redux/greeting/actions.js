@@ -1,32 +1,21 @@
-import axios from 'axios';
+import handleRequest from '../handleRequest';
 
-// import fetchGreeting from '../../mockAPI/greeting';
+export const setInitialValue = () => async (dispatch, getState) => {
+  const { greeting } = getState();
 
-export const setInitialValue = () => dispatch => {
-  axios({
-    url: '/api/greeting',
-    method: 'get',
-    headers: { 'X-Requested-With': 'XMLHttpRequest' },
-    responseType: 'json',
-    data: {},
-    withCredentials: false,
-    proxy: {
-      host: 'localhost',
-      port: process.env.PORT || 3000
-    }
-  })
-    .then(({ data }) => {
+  dispatch({ type: 'GREETING_DATA_FETCH_REQUEST', ...greeting });
+
+  try {
+    const response = await handleRequest('greeting');
+
+    if (response.status === 200) {
       dispatch({
-        type: 'SET_GREETING_INITIAL_VALUE_SUCCESS',
-        value: data.greeting.value || ''
+        type: 'GREETING_DATA_FETCH_SUCCESS',
+        initialFetch: true,
+        message: response.data.greeting.message || ''
       });
-    })
-    .catch(error => error);
-
-  // fetchGreeting().then(response => {
-  //   dispatch({
-  //     type: 'SET_GREETING_INITIAL_VALUE_SUCCESS',
-  //     value: response.greeting.value || ''
-  //   });
-  // });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };

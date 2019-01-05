@@ -1,14 +1,31 @@
 import { combineReducers } from 'redux';
 
-const value = (state = '', action) => {
+const initialState = {
+  initialFetch: false,
+  fetchError: false,
+  message: ''
+};
+
+const initialFetch = (state = initialState.initialFetch, action) => {
   switch (action.type) {
-    case 'SET_GREETING_INITIAL_VALUE_SUCCESS':
-      return action.value;
+    case 'GREETING_DATA_FETCH_REQUEST':
+    case 'GREETING_DATA_FETCH_SUCCESS':
+      return action.initialFetch;
+    default:
+      return state;
+  }
+};
+
+const message = (state = initialState.message, action) => {
+  switch (action.type) {
+    case 'GREETING_DATA_FETCH_SUCCESS':
+      return action.message;
     default:
       return state;
   }
 };
 
 export default combineReducers({
-  value
+  initialFetch,
+  message
 });

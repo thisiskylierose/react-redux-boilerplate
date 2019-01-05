@@ -5,10 +5,10 @@ import greetings from './data';
 const fetchGreeting = () =>
   promiseDelay(randomDelay()).then(() => {
     const key = getRandomInt(0, greetings.length);
-    const value = greetings[key];
+    const message = greetings[key];
 
     return {
-      greeting: { value }
+      greeting: { message }
     };
   });
 
