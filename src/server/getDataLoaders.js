@@ -1,7 +1,7 @@
 import fetchCounter from '../mockAPI/counter';
 import fetchGreeting from '../mockAPI/greeting';
 
-const loaders = {
+const dataLoaders = {
   counter: fetchCounter,
   greeting: fetchGreeting
 };
@@ -9,8 +9,8 @@ const loaders = {
 const getDataLoaders = routeloaders => {
   if (routeloaders) {
     return routeloaders.reduce((accumlator, loader) => {
-      if (loaders[loader]) {
-        return [...accumlator, loaders[loader]()];
+      if (dataLoaders[loader]) {
+        return [...accumlator, dataLoaders[loader]()];
       }
 
       return accumlator;

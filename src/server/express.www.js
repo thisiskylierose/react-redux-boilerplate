@@ -26,10 +26,13 @@ app.use('/', express.static('www'));
 app.use('/data', express.static('data'));
 
 app.get('/api/:route', async (req, res) => {
-  // console.log('req.params.route', req.params.route);
+  const route = req.params.route;
+  const dataLoaders = getDataLoaders([route]);
+
   try {
-    const result = await fetchGreeting();
-    // console.log(result);
+    const results = await Promise.all(dataLoaders);
+    const result = results.reduce((accumulator, results) => ({ ...accumulator, ...results }), {});
+
     res.send(result);
   } catch (error) {
     // eslint-disable-next-line no-console

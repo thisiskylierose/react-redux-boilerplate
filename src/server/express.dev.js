@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import webpack from 'webpack';
 
 import template from './template';
+import getDataLoaders from './getDataLoaders';
 import config from '../../config/webpack.client.hot';
 import fetchGreeting from '../mockAPI/greeting';
 
@@ -29,7 +30,9 @@ app.use(
 app.use(require('webpack-hot-middleware')(compiler));
 
 app.get('/api/:route', async (req, res) => {
-  // console.log('req.params.route', req.params.route);
+  const route = req.params.route;
+  const dataLoaders = getDataLoaders([route]);
+
   try {
     const result = await fetchGreeting();
     res.send(result);
