@@ -15,6 +15,7 @@ module.exports = {
     publicPath: '/assets/'
   },
   resolve: {
+    alias: { 'react-dom': '@hot-loader/react-dom' },
     modules: ['node_modules', path.join(process.cwd(), 'src')],
     extensions: ['.js', '.json']
   },

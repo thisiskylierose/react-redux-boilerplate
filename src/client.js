@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
 import styles from './client.css';
+
 import App from './components/App';
 
-const render = (Component) => {
+const render = Component => {
   const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate;
 
   renderMethod(

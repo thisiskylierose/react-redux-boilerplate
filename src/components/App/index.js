@@ -1,6 +1,7 @@
 import React from 'react';
+import { hot } from 'react-hot-loader/root';
 
-import styles from './app.css';
+import styles from './App.css';
 
 const App = () => (
   <div className={styles.container}>
@@ -10,4 +11,4 @@ const App = () => (
   </div>
 );
 
-export default App;
+export default hot(App);
